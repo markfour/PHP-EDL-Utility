@@ -37,6 +37,12 @@
 			$edl->$fcm = str_replace('FCM: ', '', $line);
 
 		} else if (preg_match('/^\d{6} /',$line, $matches)) {
+			// For example,
+			// 000001  B002_C063_110594                 V     C        18:39:44:18 18:39:47:05 01:00:13:10 01:00:15:21
+			$removeMultiScpace = preg_replace('/\s(?=\s)/', '', $line);
+			$souceArray = preg_split('/\s/', $removeMultiScpace);
+			print('$souceArray:'.count($souceArray));
+
 			array_push($sources, $matches[0]);
 		}
 	}
@@ -47,4 +53,6 @@
 	foreach ($sources as $v) {
 		print('sources:'.$v);
 	}
+
+	printf(`\n`);
 ?>
